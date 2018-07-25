@@ -1,3 +1,25 @@
 page-home {
 
 }
+.encabezado {
+    background-color: green;
+    text-align: center;
+}
+.contenido {
+    width: 95%;
+    height: 280px;
+    background-color: gray;
+}
+.accesos {
+    width: 95%;
+    height: 50px;
+    background-color: green;
+    padding-left: 15%;
+}
+.acceso {
+    width: 25%;
+    height: 45px;
+    //background-color: gray;
+    float: left;
+    padding-right: 5%;
+}

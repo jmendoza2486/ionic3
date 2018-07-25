@@ -1,14 +1,35 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      Ionic Blank
+    <ion-title class="encabezado">
+      SeoK
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  Pues si!!!
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <div class="contenido">
+    Mapa
+    <ion-img width="180" height="180" src="mapa.png"></ion-img>
+  </div>
+  <div class="accesos">
+    <div class="acceso">
+        <button ion-button round>Reportar</button>
+    </div>
+    <div class="acceso">
+        <button ion-button round>Análisis</button>
+    </div>
+    <div class="acceso">
+        <button ion-button round>Mi SeoK</button>
+    </div>
+
+    <ion-fab edge right top>
+      <button color="danger" ion-fab="" class="fab fab-ios fab-ios-danger">
+        <ion-icon class="fab-close-icon icon icon-ios ion-ios-close" name="close" role="img" aria-label="close"></ion-icon>
+        <span class="button-inner">
+            <ion-icon _ngcontent-c0="" name="contact" role="img" class="icon icon-ios ion-ios-contact" aria-label="contact"></ion-icon>
+        </span>
+        <div class="button-effect"></div>
+      </button>
+    </ion-fab>
+  </div>  
 </ion-content>
