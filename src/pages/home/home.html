@@ -8,7 +8,24 @@
 
 <ion-content padding>
   <div class="contenido">
-    <ion-img width="100%" height="280" src="../../assets/imgs/mapa.png"></ion-img>
+    <ion-card>
+      <ion-card-header>
+        Iniciar Sesión
+      </ion-card-header>    
+      <ion-card-content>
+          <ion-item>
+            <ion-label color="primary">Usuario</ion-label>
+            <ion-input [(ngModel)]="usuario" placeholder="Usuario"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label id="contrasena" color="primary">Contraseña</ion-label>
+            <ion-input placeholder="Contraseña"></ion-input>
+          </ion-item>
+          <button ion-button (click)="showAlert()">Iniciar sesión</button>
+          <button ion-button outline (click)="showAlertRecuperar()">Recuperar contraseña</button>
+      </ion-card-content>    
+    </ion-card>
+    
   </div>
   <div class="accesos">
     <div class="acceso">
@@ -26,17 +43,6 @@
           <ion-icon name="contacts"></ion-icon>
         </button>
     </div>
-
     
-
-    <ion-fab edge right top>
-      <button color="danger" ion-fab="" class="fab fab-ios fab-ios-danger">
-        <ion-icon class="fab-close-icon icon icon-ios ion-ios-close" name="close" role="img" aria-label="close"></ion-icon>
-        <span class="button-inner">
-            <ion-icon _ngcontent-c0="" name="contact" role="img" class="icon icon-ios ion-ios-contact" aria-label="contact"></ion-icon>
-        </span>
-        <div class="button-effect"></div>
-      </button>
-    </ion-fab>
   </div>  
 </ion-content>
