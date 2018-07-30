@@ -8,25 +8,31 @@
 
 <ion-content padding>
   <div class="contenido">
+    <div class="logo-SeoK">
+        <img class="img-logo" src="../../assets/imgs/Logo-SeoK.png">
+    </div>
     <ion-card>
-      <ion-card-header>
-        Iniciar Sesión
-      </ion-card-header>    
       <ion-card-content>
           <ion-item>
-            <ion-label color="primary">Usuario</ion-label>
             <ion-input [(ngModel)]="usuario" placeholder="Usuario"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label id="contrasena" color="primary">Contraseña</ion-label>
-            <ion-input placeholder="Contraseña"></ion-input>
+            <ion-input type="password" placeholder="Contraseña"></ion-input>
           </ion-item>
-          <button ion-button (click)="showAlert()">Iniciar sesión</button>
-          <button ion-button outline (click)="showAlertRecuperar()">Recuperar contraseña</button>
+
+          <div class="botones">
+              <button class="boton" ion-button (click)="AlertInicio()">INGRESAR</button>
+              <button class="boton" ion-button (click)="AlertRegistro()">REGISTRARME</button>              
+          </div>
+          <div class="recuperar">
+              <label (click)="showAlertRecuperar()">RECUPERAR CONTRASEÑA</label>
+          </div>     
+          
       </ion-card-content>    
     </ion-card>
     
   </div>
+  <!--
   <div class="accesos">
     <div class="acceso">
         <button ion-button round>
@@ -42,7 +48,7 @@
         <button ion-button round>
           <ion-icon name="contacts"></ion-icon>
         </button>
-    </div>
-    
-  </div>  
+    </div>    
+  </div>  -->
+
 </ion-content>
