@@ -15,34 +15,56 @@
 
 <ion-content padding>
     <ion-card-header>
-        Bienvenido {{nombre}}
+        Bienvenido al registro
     </ion-card-header>
     <ion-card>
+      {{alertas['nombre']}}
       <ion-card-content>
         <ion-item>
           <ion-input [(ngModel)]="nombre" placeholder="Nombre"></ion-input>
         </ion-item>
+        <ion-item *ngIf="alertas[0]">
+          <span item-start class="alerta">{{msj_obligatorio}}</span>
+        </ion-item>
         <ion-item>
           <ion-input [(ngModel)]="apellido" placeholder="Apellido"></ion-input>
         </ion-item>
+        <ion-item *ngIf="alertas[1]">
+            <span item-start class="alerta">{{msj_obligatorio}}</span>
+          </ion-item>
         <ion-item>
           <ion-input [(ngModel)]="usuario" placeholder="Usuario"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="alertas[2]">
+          <span item-start class="alerta">{{msj_obligatorio}}</span>
         </ion-item>
         <ion-item>
           <ion-input [(ngModel)]="contrasena" type="password" placeholder="Contraseña"></ion-input>
         </ion-item>
+        <ion-item *ngIf="alertas[3]">
+          <span item-start class="alerta">{{msj_obligatorio}}</span>
+        </ion-item>
         <ion-item>
           <ion-input [(ngModel)]="conf_contrasena" type="password" placeholder="Confirmar contraseña"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="alertas[4]">
+          <span item-start class="alerta">{{msj_confirmacion}}</span>
         </ion-item>
         <ion-item>
           <ion-input [(ngModel)]="email" placeholder="Email"></ion-input>
         </ion-item>
+        <ion-item *ngIf="alertas[5]">
+          <span item-start class="alerta">{{msj_obligatorio}}</span>
+        </ion-item>
         <ion-item>
           <ion-input [(ngModel)]="conf_email" placeholder="Confirmar Email"></ion-input>
         </ion-item>
+        <ion-item *ngIf="alertas[6]">
+          <span item-start class="alerta">{{msj_confirmacion}}</span>
+        </ion-item>
 
         <div class="botones">
-            <button class="boton" ion-button (click)="AlertRegistro()">REGISTRARME</button>              
+            <button class="boton" ion-button (click)="creaRegistro()">REGISTRARME</button>              
         </div>
     </ion-card-content>    
   </ion-card>
