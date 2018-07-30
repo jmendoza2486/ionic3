@@ -12,6 +12,11 @@ import { RegistroPage } from './../registro/registro';
 })
 export class HomePage {
   usuario : string = "";
+  contrasena : string = "";
+  iniciar : boolean = true;
+  msj_obligatorio : string = "Campo obligatorio";
+  alertas: boolean[] = [false,false];
+
   paginaInicio = InicioPage;
   paginaRegistro = RegistroPage;
 
@@ -19,20 +24,36 @@ export class HomePage {
 
   }
 
+  validaInicio(){
+    this.iniciar = true;
+    this.alertas = [false,false];
+    if(this.usuario == ""){
+      this.iniciar = false;
+      this.alertas[0] = true;
+    }
+    if(this.contrasena == ""){
+      this.iniciar = false;
+      this.alertas[1] = true;
+    }
+  }
+
   AlertInicio() {
-    let alert = this.alertCtrl.create({
-      title: 'Login',
-      subTitle: 'Sesión iniciada...Hola: ' + this.usuario,
-      /*buttons: [{
-        text: 'Iniciar',
-        handler: data => {
-          console.log(data);
-          this.navCtrl.push(this.paginaInicio,{ 'nombre':this.usuario });
-        }
-      }]*/
-    });
-    console.log('recibe: ' + this.usuario);
-    alert.present();
+    this.validaInicio();
+    if(this.iniciar){
+      let alert = this.alertCtrl.create({
+        title: 'Login',
+        subTitle: 'Sesión iniciada...Hola: ' + this.usuario.toUpperCase()
+        /*buttons: [{
+          text: 'Iniciar',
+          handler: data => {
+            console.log(data);
+            this.navCtrl.push(this.paginaInicio,{ 'nombre':this.usuario });
+          }
+        }]*/
+      });
+      console.log('recibe: ' + this.usuario);
+      alert.present();
+    }
   }
 
   AlertRegistro() {
@@ -46,9 +67,6 @@ export class HomePage {
       subTitle: 'Escribe tu correo para recuperar tu contraseña.',
       inputs : [{
           placeholder: 'Correo electrónico'
-        },
-        {
-          placeholder: 'Correo electrónico2'
         }
       ],
       buttons: [
@@ -67,7 +85,7 @@ export class HomePage {
   showAlertConfirmaRecuperar(data) {
     let alert = this.alertCtrl.create({
       title: 'Recuperar Contraseña',
-      subTitle: 'Acabamos de enviarte un mensaje a tu correo: ' + data[0] + ', ' + data[1],
+      subTitle: 'Acabamos de enviarte un mensaje a tu correo: ' + data[0],
       buttons: ['OK']
     });
     alert.present();

@@ -69,11 +69,11 @@ export class RegistroPage {
   confirmaRegistro(){
     if(this.registro){
       let alert = this.alertCtrl.create({
-        title: 'Registro',
-        subTitle: 'Registro correcto ' + this.nombre.toUpperCase() + ', ya puedes iniciar sesión.',
+        title: 'Registro exitoso!',
+        subTitle: 'Bienvenido ' + this.nombre.toUpperCase() + ', ya puedes iniciar sesión.',
         buttons: [
           {
-            text: 'OK',
+            text: 'Iniciar',
             handler:()=>{
               this.navCtrl.pop();
             }
