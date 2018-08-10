@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { AlertController } from 'ionic-angular';
+import { AlertController, LoadingController  } from 'ionic-angular';
 
 import { InicioPage } from './../inicio/inicio';
 import { RegistroPage } from './../registro/registro';
@@ -21,7 +21,12 @@ export class HomePage {
   paginaInicio = InicioPage;
   paginaRegistro = RegistroPage;
 
-  constructor(private NavParams: NavParams ,private navCtrl: NavController, public alertCtrl: AlertController, public servApi :ServicioApiProvider) {
+  constructor(
+    private NavParams: NavParams ,
+    private navCtrl: NavController,
+    public alertCtrl: AlertController, 
+    public servApi :ServicioApiProvider,
+    public loadingCtrl : LoadingController ) {
 
   }
 
@@ -39,22 +44,30 @@ export class HomePage {
   }
 
   AlertInicio() {
+    let loader = this.loadingCtrl.create({
+      content: "Please wait..."
+    });
+
     this.validaInicio();
+
+    let alert = this.alertCtrl.create({
+      title: 'Error - Inicio de Sesión',
+      subTitle: 'Usuario o contraseña invalidos',
+      buttons: [{
+          text: 'OK'
+      }]
+    });
+
     if(this.iniciar){
       this.servApi.inicioSesion(this.usuario, this.contrasena).then(data => {
-        if(typeof data !== 'undefined'){
-          console.log("INICIO EN PAGE: ",data[0].nombre);
+        console.log("INICIO EN PAGE: ",data[0].nombre);
           this.sesion = true;
           this.navCtrl.push(this.paginaInicio,{'nombre':data[0].nombre, 'data':data[0]});
-        }
-        else{
-          let alert = this.alertCtrl.create({
-            title: 'Sesión error!',
-            subTitle: 'Usuario o contraseña inválidos'
-          })
-          alert.present();  
-        }
-      })
+    }).catch(function (err) {
+        loader.dismiss();
+        console.log("USUARIO NO REGISTRADO EN BD");        
+        alert.present();
+    });
 
       /*if(!this.sesion){
         let alert = this.alertCtrl.create({
