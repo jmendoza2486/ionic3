@@ -4,7 +4,7 @@ import { AlertController } from 'ionic-angular';
 
 import { InicioPage } from './../inicio/inicio';
 import { RegistroPage } from './../registro/registro';
-
+import {ServicioApiProvider} from '../../providers/servicio-api/servicio-api';
 
 @Component({
   selector: 'page-home',
@@ -16,11 +16,12 @@ export class HomePage {
   iniciar : boolean = true;
   msj_obligatorio : string = "Campo obligatorio";
   alertas: boolean[] = [false,false];
+  usuarios: any[] = [];
 
   paginaInicio = InicioPage;
   paginaRegistro = RegistroPage;
 
-  constructor(private NavParams: NavParams ,private navCtrl: NavController, public alertCtrl: AlertController) {
+  constructor(private NavParams: NavParams ,private navCtrl: NavController, public alertCtrl: AlertController, public servApi :ServicioApiProvider) {
 
   }
 
@@ -40,19 +41,9 @@ export class HomePage {
   AlertInicio() {
     this.validaInicio();
     if(this.iniciar){
-      let alert = this.alertCtrl.create({
-        title: 'Login',
-        subTitle: 'Sesión iniciada...Hola: ' + this.usuario.toUpperCase()
-        /*buttons: [{
-          text: 'Iniciar',
-          handler: data => {
-            console.log(data);
-            this.navCtrl.push(this.paginaInicio,{ 'nombre':this.usuario });
-          }
-        }]*/
-      });
-      console.log('recibe: ' + this.usuario);
-      alert.present();
+      this.servApi.inicioSesion(this.usuario).then(data => {
+        console.log("entro",data);
+      })
     }
   }
 
