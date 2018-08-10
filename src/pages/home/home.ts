@@ -16,7 +16,7 @@ export class HomePage {
   iniciar : boolean = true;
   msj_obligatorio : string = "Campo obligatorio";
   alertas: boolean[] = [false,false];
-  usuarios: any[] = [];
+  sesion : boolean = false;
 
   paginaInicio = InicioPage;
   paginaRegistro = RegistroPage;
@@ -41,10 +41,29 @@ export class HomePage {
   AlertInicio() {
     this.validaInicio();
     if(this.iniciar){
-      this.servApi.inicioSesion(this.usuario).then(data => {
-        console.log("entro",data);
+      this.servApi.inicioSesion(this.usuario, this.contrasena).then(data => {
+        if(typeof data !== 'undefined'){
+          console.log("INICIO EN PAGE: ",data[0].nombre);
+          this.sesion = true;
+          this.navCtrl.push(this.paginaInicio,{'nombre':data[0].nombre, 'data':data[0]});
+        }
+        else{
+          let alert = this.alertCtrl.create({
+            title: 'Sesión error!',
+            subTitle: 'Usuario o contraseña inválidos'
+          })
+          alert.present();  
+        }
       })
-    }
+
+      /*if(!this.sesion){
+        let alert = this.alertCtrl.create({
+          title: 'Sesión error!',
+          subTitle: 'Usuario o contraseña inválidos'
+        })
+        alert.present();
+      }*/
+    }    
   }
 
   AlertRegistro() {

@@ -14,8 +14,11 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class InicioPage {
   nombre: string;
+  data: object;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.nombre = this.navParams.get('nombre');
+    this.data = this.navParams.get('data');
+    console.log("Recibe: ",this.data);
   }
 
   ionViewDidLoad() {
