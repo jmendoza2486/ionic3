@@ -16,8 +16,7 @@ export class HomePage {
   iniciar : boolean = true;
   msj_obligatorio : string = "Campo obligatorio";
   alertas: boolean[] = [false,false];
-  sesion : boolean = false;
-
+  
   paginaInicio = InicioPage;
   paginaRegistro = RegistroPage;
 
@@ -27,7 +26,12 @@ export class HomePage {
     public alertCtrl: AlertController, 
     public servApi :ServicioApiProvider,
     public loadingCtrl : LoadingController ) {
+      
+  }
 
+  ionViewCanEnter(){
+    this.usuario = "";
+    this.contrasena = "";
   }
 
   validaInicio(){
@@ -60,22 +64,13 @@ export class HomePage {
 
     if(this.iniciar){
       this.servApi.inicioSesion(this.usuario, this.contrasena).then(data => {
-        console.log("INICIO EN PAGE: ",data[0].nombre);
-          this.sesion = true;
+          console.log("INICIO EN PAGE: ",data[0].nombre);
           this.navCtrl.push(this.paginaInicio,{'nombre':data[0].nombre, 'data':data[0]});
-    }).catch(function (err) {
-        loader.dismiss();
-        console.log("USUARIO NO REGISTRADO EN BD");        
-        alert.present();
-    });
-
-      /*if(!this.sesion){
-        let alert = this.alertCtrl.create({
-          title: 'Sesión error!',
-          subTitle: 'Usuario o contraseña inválidos'
-        })
-        alert.present();
-      }*/
+      }).catch(function (err) {
+          loader.dismiss();
+          console.log("USUARIO NO REGISTRADO EN BD");        
+          alert.present();
+      });
     }    
   }
 

@@ -17,6 +17,21 @@ export class ServicioApiProvider {
     console.log('Hello ServicioApiProvider Provider');
   }
   
+  registroUsuario(objUsuario): Promise<any> {
+    return this.http.post(this.base + '/usuarios',
+      objUsuario
+    )
+          .toPromise()
+          .then(response => {
+              if(typeof response !== 'undefined'){
+                console.log("REGISTRO EN API",response);
+                return response;
+              }
+              else console.log("no existe - API");
+          })
+          .catch(err => err);
+  }
+
   inicioSesion(usuario,contrasena): Promise<any> {
       return this.http.get(this.base + '/usuarios/?filter[where][and][0][usuario]='+usuario+'&filter[where][and][1][contrasena]='+contrasena)
           .toPromise()
@@ -29,4 +44,6 @@ export class ServicioApiProvider {
           })
           .catch(err => err);
   }
+
+
 }

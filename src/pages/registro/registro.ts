@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 
+
+import {ServicioApiProvider} from '../../providers/servicio-api/servicio-api';
+
 /**
  * Generated class for the RegistroPage page.
  *
@@ -21,12 +24,25 @@ export class RegistroPage {
   conf_contrasena: string = "";
   email: string = "";
   conf_email: string = "";
+
+  objUsuario : [{}] = [{}];
+    /*nombre: '',
+    apellido: '',*/
+    //usuario: '',
+    //contrasena: ''/*,
+    //email: ''*/
+  //}];
+
   msj_obligatorio: string = "Campo obligatorio";
   msj_confirmacion: string = "No coinciden los valores";
   alertas: boolean[] = [false,false,false,false,false,false,false];
   registro: boolean = true;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public alertCtrl: AlertController,
+    public servApi : ServicioApiProvider) {
     //this.nombre = this.navParams.get('nombre');
   }
 
@@ -67,20 +83,46 @@ export class RegistroPage {
   }
 
   confirmaRegistro(){
+    
+    let alert = this.alertCtrl.create({
+      title: 'Error - Registro usuario',
+      subTitle: 'No se pudo registrar el usuario',
+      buttons: [{
+          text: 'OK'
+      }]
+    });
+
     if(this.registro){
-      let alert = this.alertCtrl.create({
-        title: 'Registro exitoso!',
-        subTitle: 'Bienvenido ' + this.nombre.toUpperCase() + ', ya puedes iniciar sesión.',
-        buttons: [
-          {
-            text: 'Iniciar',
-            handler:()=>{
-              this.navCtrl.pop();
+
+      this.objUsuario.push({nombre: this.nombre, 
+                            usuario:this.usuario, 
+                            contrasena:this.contrasena,
+                            apellido: this.apellido,
+                            email : this.email
+                          });
+
+      console.log("OBJETO DEL USUARIO: ",this.objUsuario)
+
+      this.servApi.registroUsuario(this.objUsuario[1]).then(data => {
+        let alert = this.alertCtrl.create({
+          title: 'Registro exitoso!',
+          subTitle: 'Bienvenido ' + this.nombre.toUpperCase() + ', ya puedes iniciar sesión.',
+          buttons: [
+            {
+              text: 'Iniciar',
+              handler:()=>{
+                this.navCtrl.pop();
+              }
             }
-          }
-        ]
+          ]
+        });
+        alert.present();
+      }).catch(function (err) {
+          console.log("ERROR REGISTRANDO USUARIO");        
+          alert.present();
       });
-      alert.present();
+
+      
     }
   }
 
