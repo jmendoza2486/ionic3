@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { ViewController, AlertController, NavController, NavParams } from 'ionic-angular';
 import {
   GoogleMaps,
   GoogleMap,
@@ -10,25 +10,71 @@ import {
   Marker
 } from '@ionic-native/google-maps';
 
+import { PerfilPage } from '../perfil/perfil';
+
 @Component({
   selector: 'page-inicio',
   templateUrl: 'inicio.html',
 })
+
 export class InicioPage {
   nombre: string;
   data: object;
   map: GoogleMap;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private googleMaps: GoogleMaps) {
+  paginaPerfil = PerfilPage;
+
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    public alertCtrl: AlertController,
+    private googleMaps: GoogleMaps) {
     this.nombre = this.navParams.get('nombre');
-    //this.data = this.navParams.get('data');
+    this.data = this.navParams.get('data');
     console.log("Recibe: ",this.data);
   }
 
+  
   ionViewDidLoad(){
     this.loadMap();
   }
 
+  //VER Y EDITAR PERFIL
+  verPerfil(){
+    console.log("Pefil: ", this.data);
+    this.navCtrl.push(this.paginaPerfil,{'data': this.data});
+
+    /*let alert = this.alertCtrl.create({
+      title: 'Perfil SeoK',
+      subTitle: 'Manten tus datos acutalizados ;)',
+      inputs : [
+        {
+          label : 'Nombre',
+          placeholder: this.data[0].nombre
+        },
+        {
+          label : 'Usuario',
+          placeholder: this.data[0].usuario
+        }
+      ],
+      buttons: [
+        {
+          text: 'Enviar correo',
+          handler: data => {
+            console.log(data);
+            this.guardarPerfil(data);
+          }
+        }
+      ]
+    });
+    alert.present();*/
+  }
+
+  guardarPerfil(data){
+    console.log("Guardar datos bd");
+  }
+
+  //FUNCIONES GOOGLE MAPS
   loadMap(){
 
     let mapOptions: GoogleMapOptions = {

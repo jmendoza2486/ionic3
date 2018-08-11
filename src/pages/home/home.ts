@@ -17,6 +17,14 @@ export class HomePage {
   msj_obligatorio : string = "Campo obligatorio";
   alertas: boolean[] = [false,false];
   
+  objUsuario : [{}] = [{
+    nombre: 'prueba',
+    apellido: 'prueba',
+    usuario: 'prueba',
+    contrasena: 'prueba',
+    email: 'prueba'
+  }];
+
   paginaInicio = InicioPage;
   paginaRegistro = RegistroPage;
 
@@ -70,9 +78,10 @@ export class HomePage {
           loader.dismiss();
           console.log("USUARIO NO REGISTRADO EN BD");        
           alert.present();
-      });*/
-
-      this.navCtrl.push(this.paginaInicio,{'nombre':this.usuario});
+      });
+      */
+      this.navCtrl.push(this.paginaInicio,{'nombre':this.usuario, 'data': this.objUsuario});
+      
     }    
   }
 

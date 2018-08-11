@@ -11,6 +11,8 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { InicioPage } from '../pages/inicio/inicio';
 import { RegistroPage } from '../pages/registro/registro';
+import { PerfilPage } from '../pages/perfil/perfil';
+
 import { ServicioApiProvider } from '../providers/servicio-api/servicio-api';
 
 @NgModule({
@@ -18,7 +20,8 @@ import { ServicioApiProvider } from '../providers/servicio-api/servicio-api';
     MyApp,
     HomePage,
     InicioPage,
-    RegistroPage
+    RegistroPage,
+    PerfilPage
   ],
   imports: [
     BrowserModule,
@@ -31,7 +34,8 @@ import { ServicioApiProvider } from '../providers/servicio-api/servicio-api';
     MyApp,
     HomePage,
     InicioPage,
-    RegistroPage
+    RegistroPage,
+    PerfilPage
   ],
   providers: [ //logica del negocio, bd, 
     StatusBar,
