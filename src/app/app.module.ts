@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { GoogleMaps } from '@ionic-native/google-maps';
+import { Camera } from '@ionic-native/camera';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -41,6 +42,7 @@ import { ServicioApiProvider } from '../providers/servicio-api/servicio-api';
     StatusBar,
     SplashScreen,
     GoogleMaps,
+    Camera,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ServicioApiProvider
   ]

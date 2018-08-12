@@ -18,11 +18,10 @@ export class HomePage {
   alertas: boolean[] = [false,false];
   
   objUsuario : [{}] = [{
-    nombre: 'prueba',
-    apellido: 'prueba',
-    usuario: 'prueba',
-    contrasena: 'prueba',
-    email: 'prueba'
+    nombre: 'jaime',
+    usuario: 'jmendoza',
+    contrasena: 'jmendoza',
+    email: 'email@email.com'
   }];
 
   paginaInicio = InicioPage;
@@ -71,16 +70,16 @@ export class HomePage {
     });
 
     if(this.iniciar){
-      this.servApi.inicioSesion(this.usuario, this.contrasena).then(data => {
+      /*this.servApi.inicioSesion(this.usuario, this.contrasena).then(data => {
           console.log("INICIO EN PAGE: ",data[0].nombre);
           this.navCtrl.push(this.paginaInicio,{'nombre':data[0].nombre, 'data':data[0]});
       }).catch(function (err) {
           loader.dismiss();
           console.log("USUARIO NO REGISTRADO EN BD");        
           alert.present();
-      });
+      });*/
       
-      //this.navCtrl.push(this.paginaInicio,{'nombre':this.usuario, 'data': this.objUsuario});
+      this.navCtrl.push(this.paginaInicio,{'nombre':this.usuario, 'data': this.objUsuario[0]});
       
     }    
   }

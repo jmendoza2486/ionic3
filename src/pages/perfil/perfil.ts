@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AlertController, IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
 import {ServicioApiProvider} from '../../providers/servicio-api/servicio-api';
 
@@ -8,6 +9,8 @@ import {ServicioApiProvider} from '../../providers/servicio-api/servicio-api';
   templateUrl: 'perfil.html',
 })
 export class PerfilPage {
+
+  image: string = null;
   nombre : string = '';
   email : string = '';
   alertas: boolean[] = [false,false];
@@ -22,6 +25,7 @@ export class PerfilPage {
     public navParams: NavParams,
     public viewCtrl: ViewController,
     public alertCtrl: AlertController,
+    private camera: Camera,
     public servApi : ServicioApiProvider
   ) {
     this.data = this.navParams.get('data');    
@@ -32,6 +36,23 @@ export class PerfilPage {
 
   dismiss() {
     this.viewCtrl.dismiss();
+  }
+
+  tomarFoto(){
+    let options: CameraOptions = {
+      destinationType: this.camera.DestinationType.DATA_URL,
+      targetWidth: 1000,
+      targetHeight: 1000,
+      quality: 100
+    }
+    this.camera.getPicture( options )
+    .then(imageData => {
+      this.image = `data:image/jpeg;base64,${imageData}`;
+    })
+    .catch(error =>{
+      console.error( error );
+    });
+    console.log("Foto tomada: ", this.image);
   }
 
   validaDatos(){

@@ -16,7 +16,8 @@
   <ion-list>
       <ion-item>
         <ion-avatar item-start>
-          <img src="{{data['image']}}">
+          <button ion-button block (click)="tomarFoto()">Toma una foto</button>
+          <img [src]="image" *ngIf="image" />
         </ion-avatar>
         <h2>{{data['nombre']}}</h2>
       </ion-item>

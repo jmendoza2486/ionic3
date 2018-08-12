@@ -1,38 +1,39 @@
 <ion-header>
-
+  <!--
   <ion-navbar>
     <ion-title>inicio</ion-title>
   </ion-navbar>
-
+-->
 </ion-header>
 
 
 <ion-content padding>
-  Welcome {{nombre}}
+  <div class="contenido">
+    
+    <div id="map_canvas"></div>
+    
+    <ion-fab top right edge>
+      <button ion-fab mini (click)="verPerfil()">Perfil</button>
+    </ion-fab>
 
-  <div id="map_canvas"></div>
-  
-  <ion-fab top right edge>
-    <button ion-fab mini (click)="verPerfil()">Perfil</button>
-  </ion-fab>
-
-  
-  <div class="accesos">
-    <div class="acceso">
-        <button ion-button round>
-          <ion-icon name="call"></ion-icon>
-        </button>
+    
+    <div class="accesos">
+      <div class="acceso">
+          <button ion-button round>
+            <ion-icon name="call"></ion-icon>
+          </button>
+      </div>
+      <div class="acceso">
+          <button ion-button round>
+            <ion-icon name="barcode"></ion-icon>
+          </button>
+      </div>
+      <div class="acceso">
+          <button ion-button round>
+            <ion-icon name="contacts"></ion-icon>
+          </button>
+      </div>    
     </div>
-    <div class="acceso">
-        <button ion-button round>
-          <ion-icon name="barcode"></ion-icon>
-        </button>
-    </div>
-    <div class="acceso">
-        <button ion-button round>
-          <ion-icon name="contacts"></ion-icon>
-        </button>
-    </div>    
+  
   </div>
-
 </ion-content>
