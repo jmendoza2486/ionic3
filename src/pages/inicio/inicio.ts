@@ -42,36 +42,7 @@ export class InicioPage {
   //VER Y EDITAR PERFIL
   verPerfil(){
     console.log("Pefil: ", this.data);
-    this.navCtrl.push(this.paginaPerfil,{'data': this.data});
-
-    /*let alert = this.alertCtrl.create({
-      title: 'Perfil SeoK',
-      subTitle: 'Manten tus datos acutalizados ;)',
-      inputs : [
-        {
-          label : 'Nombre',
-          placeholder: this.data[0].nombre
-        },
-        {
-          label : 'Usuario',
-          placeholder: this.data[0].usuario
-        }
-      ],
-      buttons: [
-        {
-          text: 'Enviar correo',
-          handler: data => {
-            console.log(data);
-            this.guardarPerfil(data);
-          }
-        }
-      ]
-    });
-    alert.present();*/
-  }
-
-  guardarPerfil(data){
-    console.log("Guardar datos bd");
+    this.navCtrl.push(this.paginaPerfil,{'data': this.data});    
   }
 
   //FUNCIONES GOOGLE MAPS

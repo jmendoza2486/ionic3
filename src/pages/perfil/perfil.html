@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Description
+      Pefil SeoK
     </ion-title>
     <ion-buttons start>
       <button ion-button (click)="dismiss()">
@@ -16,17 +16,28 @@
   <ion-list>
       <ion-item>
         <ion-avatar item-start>
-          <img src="{{data[0].image}}">
+          <img src="{{data['image']}}">
         </ion-avatar>
-        <h2>{{data[0].nombre}}</h2>
-        <p>{{data[0].usuario}}</p>
+        <h2>{{data['nombre']}}</h2>
       </ion-item>
 
       <ion-item>
-        {{data[0].usuario}}
-        <ion-note item-end>
-          {{data[0].email}}
-        </ion-note>
+        <ion-label floating>Nombre</ion-label>
+        <ion-input [(ngModel)]="nombre" type="text" value="{{data['nombre']}}"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="alertas[0]">
+        <span item-start class="alerta">{{msj_obligatorio}}</span>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Email</ion-label>
+        <ion-input [(ngModel)]="email" type="text" value="{{data['email']}}"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="alertas[1]">
+        <span item-start class="alerta">{{msj_obligatorio}}</span>
       </ion-item>
   </ion-list>
+  <div class="botones">
+    <button class="boton" ion-button (click)="actualizar()">Actualizar</button>
+    <button class="boton" ion-button (click)="cancelar()">Cancelar</button>
+  </div>
 </ion-content>
