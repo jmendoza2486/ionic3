@@ -16,6 +16,21 @@ export class ServicioApiProvider {
   constructor(public http: HttpClient) {
     console.log('Hello ServicioApiProvider Provider');
   }
+
+  registroReporte(objReporte): Promise<any> {
+    return this.http.post(this.base + '/reportes',
+    objReporte
+    )
+          .toPromise()
+          .then(response => {
+              if(typeof response !== 'undefined'){
+                console.log("REGISTRO EN API",response);
+                return response;
+              }
+              else console.log("no existe - API");
+          })
+          .catch(err => err);
+  }
   
   actualizaUsuario(objId, objUsuario): Promise<any> {
     return this.http.put(this.base + '/usuarios/'+objId,
