@@ -16,7 +16,7 @@
   <ion-list>
       <ion-item>
         <ion-avatar item-start>
-          <button ion-button block (click)="tomarFoto()">Toma una foto</button>
+          <button ion-button block (click)="tomarFoto()">Foto</button>
           <img [src]="image" *ngIf="image" />
         </ion-avatar>
         <h2>{{data['nombre']}}</h2>
@@ -38,6 +38,8 @@
       </ion-item>
   </ion-list>
   <div class="botones">
+    <ion-label>Perfil</ion-label>
+    <button class="boton" ion-button (click)="activarAgente()">Activar</button><br>
     <button class="boton" ion-button (click)="actualizar()">Actualizar</button>
     <button class="boton" ion-button (click)="cancelar()">Cancelar</button>
   </div>

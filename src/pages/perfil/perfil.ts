@@ -18,7 +18,7 @@ export class PerfilPage {
   msj_obligatorio: string = "Campo obligatorio";
 
   data: object;
-  objUsuario : [{}] = [{}];
+  objUsuario : object;
 
   constructor(
     public navCtrl: NavController,
@@ -36,6 +36,76 @@ export class PerfilPage {
 
   dismiss() {
     this.viewCtrl.dismiss();
+  }
+
+  activarAgente(){
+    let alert = this.alertCtrl.create({
+      title: 'Perfil SeoK',
+      subTitle: 'Activar modo Agente',
+      inputs : [{
+          placeholder: 'Código de activación'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Validar',
+          handler:(codigo)=>{
+            this.validarAgente(codigo);
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  validarAgente( codigo ){
+    console.log("Inicia proceso activar agente: ",codigo[0]);
+    let alert = this.alertCtrl.create({
+      title: 'Error - Activar Agente',
+      subTitle: 'No se pudo activar el modo Agente',
+      buttons: [{
+          text: 'OK'
+      }]
+    });
+
+    this.servApi.consultaCodigoAgente(this.data['id'],codigo[0]).then(data => {
+      console.log("Coincidio codigo:", data[0].codigo);
+      //this.objUsuario = [{}];
+      /*this.objUsuario.push({
+        nombre: this.nombre, 
+        usuario:this.data['usuario'], 
+        contrasena:this.data['contrasena'],
+        email : this.email,
+        tipoUsuario : 'Agente'
+      });*/
+      this.objUsuario = this.data;
+      this.objUsuario['nombre']=this.nombre;
+      this.objUsuario['email']=this.email;
+      this.objUsuario['tipo']='Agente';
+
+      console.log("Objeto",this.objUsuario);
+
+      this.servApi.actualizaUsuario(this.data['id'],this.objUsuario).then(data => {
+        let alert = this.alertCtrl.create({
+          title: 'Perfil SeoK',
+          subTitle: 'Modo Agente Activado',
+          buttons: [
+            {
+              text: 'Ok'
+            }
+          ]
+        });
+        alert.present();
+      
+      }).catch(function (err) {
+          console.log("ERROR actualizando USUARIO");        
+          alert.present();
+      });
+      
+    }).catch(function (err) {
+        console.log("ERROR codigo invalido para Agente");        
+        alert.present();
+    });
   }
 
   tomarFoto(){
@@ -78,16 +148,19 @@ export class PerfilPage {
     });
 
     if(this.validaDatos()){
-      this.objUsuario.push({
+      /*this.objUsuario.push({
         nombre: this.nombre, 
         usuario:this.data['usuario'], 
         contrasena:this.data['contrasena'],
         email : this.email
-      });
+      });*/
+      this.objUsuario = this.data;
+      this.objUsuario['nombre']=this.nombre;
+      this.objUsuario['email']=this.email;
       
-      console.log("Datos para acutalizar: ",this.data['id'],this.objUsuario[1] );
+      console.log("Datos para acutalizar: ",this.data['id'],this.objUsuario );
 
-      this.servApi.actualizaUsuario(this.data['id'],this.objUsuario[1]).then(data => {
+      this.servApi.actualizaUsuario(this.data['id'],this.objUsuario).then(data => {
         let alert = this.alertCtrl.create({
           title: 'Actualización Perfil',
           subTitle: 'Actualización exitosa.',

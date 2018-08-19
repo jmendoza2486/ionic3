@@ -71,7 +71,7 @@ export class HomePage {
 
     if(this.iniciar){
       this.servApi.inicioSesion(this.usuario, this.contrasena).then(data => {
-          console.log("INICIO EN PAGE: ",data[0].nombre);
+          console.log("INICIO EN PAGE: ",data[0]);
           this.navCtrl.push(this.paginaInicio,{'nombre':data[0].nombre, 'data':data[0]});
       }).catch(function (err) {
           loader.dismiss();
@@ -82,6 +82,10 @@ export class HomePage {
       //this.navCtrl.push(this.paginaInicio,{'nombre':this.usuario, 'data': this.objUsuario[0]});
       
     }    
+  }
+
+  inicioInvitado(){
+    this.navCtrl.push(this.paginaInicio,{'nombre':this.usuario, 'data': this.objUsuario[0]});
   }
 
   AlertRegistro() {

@@ -20,7 +20,6 @@ import { PerfilPage } from '../perfil/perfil';
 })
 
 export class InicioPage {
-  nombre: string;
   data: object;
   map: GoogleMap;
   objReporte : [{}] = [{}];
@@ -35,11 +34,30 @@ export class InicioPage {
     public alertCtrl: AlertController,
     private servApi : ServicioApiProvider,
     private googleMaps: GoogleMaps) {
-    this.nombre = this.navParams.get('nombre');
     this.data = this.navParams.get('data');
     console.log("Recibe: ",this.data);
   }
 
+  ionViewWillEnter(){
+    console.log("REGRESO A PAGINA INICIO");
+    //Se actualiza en objeto los datos del usuario como estan en BD
+    let alert = this.alertCtrl.create({
+      title: 'Error - Retomando Usuario',
+      subTitle: 'Usuario no retornado',
+      buttons: [{
+          text: 'OK'
+      }]
+    });
+    
+    this.servApi.consultaUsuario(this.data['id']).then(data => {
+        console.log("ACTUALIZO USUARIO: ",data['nombre']);
+        this.data = data;
+        console.log("Retoma datos usuario: ", this.data);
+    }).catch(function (err) {
+        console.log("USUARIO NO REGISTRADO EN BD");        
+        alert.present();
+    })
+  }
   
   ionViewDidLoad(){
     this.loadMap();
@@ -50,11 +68,11 @@ export class InicioPage {
   generarReporte(tipo){
 
     this.objReporte.push({
-      id_usuario: this.data['id'], 
+      idUsuario: this.data['id'], 
       tipo: tipo, 
       latitud : this.latitud,
       longitud : this.longitud,
-      agente_id : ''
+      idAgente : ''
     });
 
     let alert = this.alertCtrl.create({
@@ -117,7 +135,7 @@ export class InicioPage {
   //VER Y EDITAR PERFIL
   verPerfil(){
     console.log("Pefil: ", this.data);
-    this.navCtrl.push(this.paginaPerfil,{'data': this.data});    
+    this.navCtrl.push(this.paginaPerfil,{'data': this.data});
   }
 
   //FUNCIONES GOOGLE MAPS

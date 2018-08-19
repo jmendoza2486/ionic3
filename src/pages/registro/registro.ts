@@ -18,20 +18,19 @@ import {ServicioApiProvider} from '../../providers/servicio-api/servicio-api';
 })
 export class RegistroPage {
   nombre: string = "";
-  apellido: string = "";
   usuario: string = "";
   contrasena: string = "";
   conf_contrasena: string = "";
   email: string = "";
   conf_email: string = "";
 
-  objUsuario : [{}] = [{}];
-    /*nombre: '',
-    apellido: '',*/
-    //usuario: '',
-    //contrasena: ''/*,
-    //email: ''*/
-  //}];
+  objUsuario : object = {
+    nombre: '',
+    usuario: '',
+    contrasena: '',
+    email: '',
+    tipo:''
+  };
 
   msj_obligatorio: string = "Campo obligatorio";
   msj_confirmacion: string = "No coinciden los valores";
@@ -54,10 +53,6 @@ export class RegistroPage {
   validaRegistro(){
     if(this.nombre == ""){
       this.alertas[0]=true;
-      this.registro = false;
-    }
-    if(this.apellido == ""){
-      this.alertas[1]=true;
       this.registro = false;
     }
     if(this.usuario == ""){
@@ -94,16 +89,16 @@ export class RegistroPage {
 
     if(this.registro){
 
-      this.objUsuario.push({nombre: this.nombre, 
-                            usuario:this.usuario, 
-                            contrasena:this.contrasena,
-                            apellido: this.apellido,
-                            email : this.email
-                          });
+      this.objUsuario['nombre']=this.nombre;
+      this.objUsuario['usuario']=this.usuario;
+      this.objUsuario['contrasena']=this.contrasena;
+      this.objUsuario['email']=this.email;
+      this.objUsuario['tipo']='Civil';
+
 
       console.log("OBJETO DEL USUARIO: ",this.objUsuario)
 
-      this.servApi.registroUsuario(this.objUsuario[1]).then(data => {
+      this.servApi.registroUsuario(this.objUsuario).then(data => {
         let alert = this.alertCtrl.create({
           title: 'Registro exitoso!',
           subTitle: 'Bienvenido ' + this.nombre.toUpperCase() + ', ya puedes iniciar sesión.',

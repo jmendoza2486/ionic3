@@ -62,12 +62,40 @@ export class ServicioApiProvider {
           .catch(err => err);
   }
 
+  consultaUsuario( userId ){
+    console.log("ID A BUSCAR EN API", userId);
+    return this.http.get(this.base + '/usuarios/'+userId)
+          .toPromise()
+          .then(response => {
+              if(typeof response !== 'undefined'){
+                console.log("Encontro usuario API: ", response);
+                return response;
+              }
+              else console.log("no existe - API");
+          })
+          .catch(err => err);
+  }
+
+  consultaCodigoAgente(idUsuario, codigo): Promise<any> {
+    console.log("API - codigo agente", idUsuario, codigo);
+    return this.http.get(this.base + '/codigosAgentes/?filter[where][and][0][idUsuario]='+idUsuario+'&filter[where][and][1][codigo]='+codigo)
+        .toPromise()
+        .then(response => {
+          if(typeof response !== 'undefined'){
+            console.log("CODIGO AGENTE EN API",response);
+            return response;
+          }
+          else console.log("no existe - API");
+        })
+        .catch(err => err);
+  }
+
   inicioSesion(usuario,contrasena): Promise<any> {
       return this.http.get(this.base + '/usuarios/?filter[where][and][0][usuario]='+usuario+'&filter[where][and][1][contrasena]='+contrasena)
           .toPromise()
           .then(response => {
               if(typeof response !== 'undefined'){
-                console.log("INICIO EN API",response[0]);
+                console.log("INICIO EN API",response);
                 return response;
               }
               else console.log("no existe - API");
