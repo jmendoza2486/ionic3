@@ -12,10 +12,13 @@
     
     <div id="map_canvas"></div>
     
-    <ion-fab top right edge>
+    <ion-fab top right edge class="boton-perfil">
       <button ion-fab mini (click)="verPerfil()">Perfil</button>
     </ion-fab>
 
+    <ion-fab top left edge class="boton-perfil">
+      <button ion-fab mini (click)="cerrarSesion()">X</button>
+    </ion-fab>
     
     <div class="accesos">
       <div class="acceso">

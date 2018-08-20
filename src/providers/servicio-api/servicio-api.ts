@@ -10,7 +10,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class ServicioApiProvider {
 
-  base : string = 'https://api-seok.herokuapp.com/';//'http://localhost:3000/api';
+  base : string = 'https://api-seok.herokuapp.com/api';//'http://localhost:3000/api';
   datos : object;
 
   constructor(public http: HttpClient) {

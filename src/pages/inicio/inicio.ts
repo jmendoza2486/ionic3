@@ -99,6 +99,10 @@ export class InicioPage {
     });
   }
 
+  cerrarSesion(){
+    this.navCtrl.pop();
+  }
+
   reportar(){
     console.log("ENTRA REPORTAR");
     let alert = this.alertCtrl.create({
