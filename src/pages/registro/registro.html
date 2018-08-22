@@ -21,44 +21,54 @@
       {{alertas['nombre']}}
       <ion-card-content>
         <ion-item>
-          <ion-input [(ngModel)]="nombre" placeholder="Nombre"></ion-input>
+            <ion-label floating>Nombre</ion-label>
+          <ion-input [(ngModel)]="nombre" ></ion-input>
         </ion-item>
         <ion-item *ngIf="alertas[0]">
           <span item-start class="alerta">{{msj_obligatorio}}</span>
         </ion-item>
         <ion-item>
-          <ion-input [(ngModel)]="usuario" placeholder="Usuario"></ion-input>
+          <ion-label floating>Usuario</ion-label>
+          <ion-input [(ngModel)]="usuario" ></ion-input>
         </ion-item>
         <ion-item *ngIf="alertas[2]">
           <span item-start class="alerta">{{msj_obligatorio}}</span>
         </ion-item>
+        <ion-item *ngIf="alertas[7]">
+            <span item-start class="alerta">{{msj_existeUsuario}}</span>
+          </ion-item>
         <ion-item>
-          <ion-input [(ngModel)]="contrasena" type="password" placeholder="Contraseña"></ion-input>
+          <ion-label floating>Contraseña</ion-label>
+          <ion-input [(ngModel)]="contrasena" type="password" ></ion-input>
         </ion-item>
         <ion-item *ngIf="alertas[3]">
           <span item-start class="alerta">{{msj_obligatorio}}</span>
         </ion-item>
         <ion-item>
-          <ion-input [(ngModel)]="conf_contrasena" type="password" placeholder="Confirmar contraseña"></ion-input>
+          <ion-label floating>Confirmar contraseña</ion-label>
+          <ion-input [(ngModel)]="conf_contrasena" type="password" ></ion-input>
         </ion-item>
         <ion-item *ngIf="alertas[4]">
           <span item-start class="alerta">{{msj_confirmacion}}</span>
         </ion-item>
         <ion-item>
-          <ion-input [(ngModel)]="email" placeholder="Email"></ion-input>
+          <ion-label floating>Email</ion-label>
+          <ion-input [(ngModel)]="email" ></ion-input>
         </ion-item>
         <ion-item *ngIf="alertas[5]">
           <span item-start class="alerta">{{msj_obligatorio}}</span>
         </ion-item>
         <ion-item>
-          <ion-input [(ngModel)]="conf_email" placeholder="Confirmar Email"></ion-input>
+          <ion-label floating>Confirmar email</ion-label>
+          <ion-input [(ngModel)]="conf_email" ></ion-input>
         </ion-item>
         <ion-item *ngIf="alertas[6]">
           <span item-start class="alerta">{{msj_confirmacion}}</span>
         </ion-item>
 
         <div class="botones">
-            <button class="boton" ion-button (click)="creaRegistro()">REGISTRARME</button>              
+            <button class="boton" ion-button (click)="creaRegistro()">REGISTRARME</button>   
+            <button class="boton" ion-button (click)="cancelar()">Cancelar</button>
         </div>
     </ion-card-content>    
   </ion-card>

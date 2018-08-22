@@ -62,6 +62,27 @@ export class ServicioApiProvider {
           .catch(err => err);
   }
 
+  existeUsuario( usuario ):Promise<any>{
+    console.log("API - usuario a validar", usuario);
+    return this.http.get(this.base + '/usuarios/?filter[where][and][0][usuario]='+usuario)
+        .toPromise()
+        .then(response => {
+          //if(typeof response !== 'undefined'){
+          console.log("check", Object.getOwnPropertyNames(response[0]).length);
+          console.log("check", Object.getOwnPropertyNames(response[0]));
+          console.log("check",response[0]);
+          if(Object.getOwnPropertyNames(response[0]).length === 0){
+            console.log("NO EXISTE - API",response);
+            return false;
+          }
+          else {
+            console.log("SI existe - API");
+            return true;
+          }
+        })
+        .catch(err => err);
+  }
+
   consultaUsuario( userId ){
     console.log("ID A BUSCAR EN API", userId);
     return this.http.get(this.base + '/usuarios/'+userId)

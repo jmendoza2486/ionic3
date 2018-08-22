@@ -34,6 +34,7 @@ export class RegistroPage {
 
   msj_obligatorio: string = "Campo obligatorio";
   msj_confirmacion: string = "No coinciden los valores";
+  msj_existeUsuario : string = "Este usuario ya existe";
   alertas: boolean[] = [false,false,false,false,false,false,false];
   registro: boolean = true;
 
@@ -46,7 +47,7 @@ export class RegistroPage {
   }
 
   reiniciaEstadosAlertas(){
-    this.alertas = [false,false,false,false,false,false,false];    
+    this.alertas = [false,false,false,false,false,false,false,false];    
     this.registro = true;
   }
 
@@ -96,27 +97,38 @@ export class RegistroPage {
       this.objUsuario['tipo']='Civil';
 
 
-      console.log("OBJETO DEL USUARIO: ",this.objUsuario)
+      //console.log("OBJETO DEL USUARIO: ",this.objUsuario)
 
-      this.servApi.registroUsuario(this.objUsuario).then(data => {
-        let alert = this.alertCtrl.create({
-          title: 'Registro exitoso!',
-          subTitle: 'Bienvenido ' + this.nombre.toUpperCase() + ', ya puedes iniciar sesión.',
-          buttons: [
-            {
-              text: 'Iniciar',
-              handler:()=>{
-                this.navCtrl.pop();
-              }
-            }
-          ]
-        });
-        alert.present();
-      }).catch(function (err) {
-          console.log("ERROR REGISTRANDO USUARIO");        
-          alert.present();
-      });
+      this.servApi.existeUsuario(this.usuario).then( existe =>{
+        if(existe == true){
+          console.log("YA EXISTE ESTE USUARIO EN BD");
+          this.alertas[7]=true;
+          this.registro = false;
+        }
+        else {
+          console.log("NO EXISTE ESTE USUARIO EN BD");    
 
+          this.servApi.registroUsuario(this.objUsuario).then(data => {
+            console.log("creado el usuario: ", data);
+            let alert = this.alertCtrl.create({
+              title: 'Registro exitoso!',
+              subTitle: 'Bienvenido ' + this.nombre.toUpperCase() + ', ya puedes iniciar sesión.',
+              buttons: [
+                {
+                  text: 'Iniciar',
+                  handler:()=>{
+                    this.navCtrl.pop();
+                  }
+                }
+              ]
+            });
+            alert.present();
+          }).catch(function (err) {
+              console.log("ERROR REGISTRANDO USUARIO");        
+              alert.present();
+          });
+        }
+      })
       
     }
   }
@@ -131,4 +143,7 @@ export class RegistroPage {
     console.log('ionViewDidLoad RegistroPage');
   }
 
+  cancelar(){
+    this.navCtrl.pop();
+  }
 }
