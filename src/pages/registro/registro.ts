@@ -18,6 +18,7 @@ import {ServicioApiProvider} from '../../providers/servicio-api/servicio-api';
 })
 export class RegistroPage {
   nombre: string = "";
+  identificacion: string = "";
   usuario: string = "";
   contrasena: string = "";
   conf_contrasena: string = "";
@@ -26,6 +27,7 @@ export class RegistroPage {
 
   objUsuario : object = {
     nombre: '',
+    identificacion:'',
     usuario: '',
     contrasena: '',
     email: '',
@@ -35,7 +37,7 @@ export class RegistroPage {
   msj_obligatorio: string = "Campo obligatorio";
   msj_confirmacion: string = "No coinciden los valores";
   msj_existeUsuario : string = "Este usuario ya existe";
-  alertas: boolean[] = [false,false,false,false,false,false,false];
+  alertas: boolean[] = [false,false,false,false,false,false,false,false];
   registro: boolean = true;
 
   constructor(
@@ -47,13 +49,17 @@ export class RegistroPage {
   }
 
   reiniciaEstadosAlertas(){
-    this.alertas = [false,false,false,false,false,false,false,false];    
+    this.alertas = [false,false,false,false,false,false,false,false,false];    
     this.registro = true;
   }
 
   validaRegistro(){
     if(this.nombre == ""){
       this.alertas[0]=true;
+      this.registro = false;
+    }
+    if(this.identificacion == ""){
+      this.alertas[8]=true;
       this.registro = false;
     }
     if(this.usuario == ""){
@@ -91,6 +97,7 @@ export class RegistroPage {
     if(this.registro){
 
       this.objUsuario['nombre']=this.nombre;
+      this.objUsuario['identificacion']=this.identificacion;
       this.objUsuario['usuario']=this.usuario;
       this.objUsuario['contrasena']=this.contrasena;
       this.objUsuario['email']=this.email;

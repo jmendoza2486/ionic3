@@ -27,6 +27,15 @@
         <ion-item *ngIf="alertas[0]">
           <span item-start class="alerta">{{msj_obligatorio}}</span>
         </ion-item>
+
+        <ion-item>
+          <ion-label floating>Identificacion</ion-label>
+        <ion-input [(ngModel)]="identificacion" ></ion-input>
+        </ion-item>
+        <ion-item *ngIf="alertas[8]">
+          <span item-start class="alerta">{{msj_obligatorio}}</span>
+        </ion-item>
+
         <ion-item>
           <ion-label floating>Usuario</ion-label>
           <ion-input [(ngModel)]="usuario" ></ion-input>
@@ -38,12 +47,14 @@
             <span item-start class="alerta">{{msj_existeUsuario}}</span>
           </ion-item>
         <ion-item>
+
           <ion-label floating>Contraseña</ion-label>
           <ion-input [(ngModel)]="contrasena" type="password" ></ion-input>
         </ion-item>
         <ion-item *ngIf="alertas[3]">
           <span item-start class="alerta">{{msj_obligatorio}}</span>
         </ion-item>
+
         <ion-item>
           <ion-label floating>Confirmar contraseña</ion-label>
           <ion-input [(ngModel)]="conf_contrasena" type="password" ></ion-input>
@@ -51,6 +62,7 @@
         <ion-item *ngIf="alertas[4]">
           <span item-start class="alerta">{{msj_confirmacion}}</span>
         </ion-item>
+
         <ion-item>
           <ion-label floating>Email</ion-label>
           <ion-input [(ngModel)]="email" ></ion-input>
@@ -58,6 +70,7 @@
         <ion-item *ngIf="alertas[5]">
           <span item-start class="alerta">{{msj_obligatorio}}</span>
         </ion-item>
+
         <ion-item>
           <ion-label floating>Confirmar email</ion-label>
           <ion-input [(ngModel)]="conf_email" ></ion-input>

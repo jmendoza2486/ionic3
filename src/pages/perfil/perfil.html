@@ -29,6 +29,15 @@
       <ion-item *ngIf="alertas[0]">
         <span item-start class="alerta">{{msj_obligatorio}}</span>
       </ion-item>
+
+      <ion-item>
+          <ion-label floating>Identificacion</ion-label>
+          <ion-input [(ngModel)]="identificacion" type="text" value="{{data['identificacion']}}"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="alertas[2]">
+          <span item-start class="alerta">{{msj_obligatorio}}</span>
+      </ion-item>
+
       <ion-item>
         <ion-label floating>Email</ion-label>
         <ion-input [(ngModel)]="email" type="text" value="{{data['email']}}"></ion-input>
@@ -36,6 +45,7 @@
       <ion-item *ngIf="alertas[1]">
         <span item-start class="alerta">{{msj_obligatorio}}</span>
       </ion-item>
+
   </ion-list>
   <div class="botones">
     <ion-label>Perfil</ion-label>

@@ -12,6 +12,7 @@ export class PerfilPage {
 
   image: string = null;
   nombre : string = '';
+  identificacion : string = '';
   email : string = '';
   alertas: boolean[] = [false,false];
   registro: boolean = true;
@@ -32,6 +33,7 @@ export class PerfilPage {
     console.log("DATOS USER EN PERFIL: ",this.data['nombre'])
     this.nombre = this.data['nombre'];
     this.email = this.data['email'];
+    this.identificacion = this.data['identificacion'];
   }
 
   dismiss() {
@@ -70,16 +72,10 @@ export class PerfilPage {
 
     this.servApi.consultaCodigoAgente(this.data['id'],codigo[0]).then(data => {
       console.log("Coincidio codigo:", data[0].codigo);
-      //this.objUsuario = [{}];
-      /*this.objUsuario.push({
-        nombre: this.nombre, 
-        usuario:this.data['usuario'], 
-        contrasena:this.data['contrasena'],
-        email : this.email,
-        tipoUsuario : 'Agente'
-      });*/
+      
       this.objUsuario = this.data;
       this.objUsuario['nombre']=this.nombre;
+      this.objUsuario['identificacion']=this.identificacion;
       this.objUsuario['email']=this.email;
       this.objUsuario['tipo']='Agente';
 
@@ -130,6 +126,10 @@ export class PerfilPage {
       this.alertas[0]=true;
       this.registro = false;
     }
+    if(this.identificacion == ""){
+      this.alertas[2]=true;
+      this.registro = false;
+    }
     if(this.email == ""){
       this.alertas[1]=true;
       this.registro = false;
@@ -148,14 +148,10 @@ export class PerfilPage {
     });
 
     if(this.validaDatos()){
-      /*this.objUsuario.push({
-        nombre: this.nombre, 
-        usuario:this.data['usuario'], 
-        contrasena:this.data['contrasena'],
-        email : this.email
-      });*/
+     
       this.objUsuario = this.data;
       this.objUsuario['nombre']=this.nombre;
+      this.objUsuario['identificacion']=this.identificacion;
       this.objUsuario['email']=this.email;
       
       console.log("Datos para acutalizar: ",this.data['id'],this.objUsuario );

@@ -19,6 +19,7 @@ export class HomePage {
   
   objUsuario : [{}] = [{
     nombre: 'jaime',
+    identificacion : '12345678',
     usuario: 'jmendoza',
     contrasena: 'jmendoza',
     email: 'email@email.com'
