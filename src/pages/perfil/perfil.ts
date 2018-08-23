@@ -62,6 +62,7 @@ export class PerfilPage {
 
   validarAgente( codigo ){
     console.log("Inicia proceso activar agente: ",codigo[0]);
+    
     let alert = this.alertCtrl.create({
       title: 'Error - Activar Agente',
       subTitle: 'No se pudo activar el modo Agente',

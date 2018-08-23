@@ -24,6 +24,7 @@ export class InicioPage {
   map: GoogleMap;
   objReporte : [{}] = [{}];
   posicion : any;
+  tipoPerfil : string = '';
 
   paginaPerfil = PerfilPage;
 
@@ -51,6 +52,7 @@ export class InicioPage {
     this.servApi.consultaUsuario(this.data['id']).then(data => {
         console.log("ACTUALIZO USUARIO: ",data['nombre']);
         this.data = data;
+        this.tipoPerfil = this.data['tipo'];
         console.log("Retoma datos usuario: ", this.data);
     }).catch(function (err) {
         console.log("USUARIO NO REGISTRADO EN BD");        
