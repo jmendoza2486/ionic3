@@ -23,7 +23,8 @@ export class InicioPage {
   data: object;
   map: GoogleMap;
   objReporte : [{}] = [{}];
-  posicion : any;
+  posLat : any;
+  posLng : any;
   tipoPerfil : string = '';
 
   paginaPerfil = PerfilPage;
@@ -71,9 +72,11 @@ export class InicioPage {
     this.objReporte.push({
       idUsuario: this.data['id'], 
       tipo: tipo, 
-      posicionUsuario : this.posicion,
+      posLatUsuario : this.posLat,
+      posLngUsuario : this.posLng,
       idAgente : '',
-      posicionAgente : ''
+      posLatAgente : '',
+      posLngAgente : ''
     });
 
     let alert = this.alertCtrl.create({
@@ -178,8 +181,9 @@ export class InicioPage {
         target: response.latLng
       });
 
-      this.posicion = response;
-      console.log("POSICION GUARDADA", this.posicion);
+      this.posLat = response['latLng']['lat'];
+      this.posLng = response['latLng']['lng'];
+      console.log("POSICION GUARDADA", this.posLat, this.posLng);
 
       this.map.addMarker({
         title: 'My Position',
