@@ -48,8 +48,8 @@
 
   </ion-list>
   <div class="botones">
-    <ion-label>Perfil</ion-label>
-    <button class="boton" ion-button (click)="activarAgente()">Activar</button><br>
+    <ion-label *ngIf="civil">Perfil</ion-label>
+    <button *ngIf="civil" class="boton" ion-button (click)="activarAgente()">Activar</button><br>
     <button class="boton" ion-button (click)="actualizar()">Actualizar</button>
     <button class="boton" ion-button (click)="cancelar()">Cancelar</button>
   </div>

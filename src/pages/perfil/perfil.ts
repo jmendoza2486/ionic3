@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AlertController, IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+//import { Base64 } from '@ionic-native/base64';
 
 import {ServicioApiProvider} from '../../providers/servicio-api/servicio-api';
 
@@ -14,6 +15,7 @@ export class PerfilPage {
   nombre : string = '';
   identificacion : string = '';
   email : string = '';
+  civil : boolean = true;
   alertas: boolean[] = [false,false];
   registro: boolean = true;
   msj_obligatorio: string = "Campo obligatorio";
@@ -27,13 +29,18 @@ export class PerfilPage {
     public viewCtrl: ViewController,
     public alertCtrl: AlertController,
     private camera: Camera,
+    //private base64: Base64,
     public servApi : ServicioApiProvider
   ) {
-    this.data = this.navParams.get('data');    
-    console.log("DATOS USER EN PERFIL: ",this.data['nombre'])
-    this.nombre = this.data['nombre'];
-    this.email = this.data['email'];
-    this.identificacion = this.data['identificacion'];
+      this.data = this.navParams.get('data');    
+      console.log("DATOS USER EN PERFIL: ",this.data['nombre'])
+      this.nombre = this.data['nombre'];
+      this.email = this.data['email'];
+      this.identificacion = this.data['identificacion'];
+      this.image = this.data['foto'];
+      if(this.data['tipo'] == 'Agente'){
+        this.civil = false;
+      }
   }
 
   dismiss() {
@@ -79,6 +86,7 @@ export class PerfilPage {
       this.objUsuario['identificacion']=this.identificacion;
       this.objUsuario['email']=this.email;
       this.objUsuario['tipo']='Agente';
+      this.objUsuario['foto'] = this.image;
 
       console.log("Objeto",this.objUsuario);
 
@@ -112,9 +120,11 @@ export class PerfilPage {
       targetHeight: 1000,
       quality: 100
     }
-    this.camera.getPicture( options )
-    .then(imageData => {
-      this.image = `data:image/jpeg;base64,${imageData}`;
+    this.camera.getPicture( options ).then(imageData => {
+      let base64Image = 'data:image/jpeg;base64,' + imageData;
+      //this.image = data:image/jpeg;base64,${imageData};
+      this.image = base64Image;
+      console.log('FOTO EN MEMORIA: ', base64Image);
     })
     .catch(error =>{
       console.error( error );
@@ -154,6 +164,7 @@ export class PerfilPage {
       this.objUsuario['nombre']=this.nombre;
       this.objUsuario['identificacion']=this.identificacion;
       this.objUsuario['email']=this.email;
+      this.objUsuario['foto'] = this.image;
       
       console.log("Datos para acutalizar: ",this.data['id'],this.objUsuario );
 
