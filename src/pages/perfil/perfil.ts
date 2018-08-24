@@ -11,7 +11,7 @@ import {ServicioApiProvider} from '../../providers/servicio-api/servicio-api';
 })
 export class PerfilPage {
 
-  image: string = null;
+  image: any = null;
   nombre : string = '';
   identificacion : string = '';
   email : string = '';
