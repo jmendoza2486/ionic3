@@ -118,7 +118,8 @@ export class PerfilPage {
       destinationType: this.camera.DestinationType.DATA_URL,
       targetWidth: 1000,
       targetHeight: 1000,
-      quality: 100
+      quality: 100,
+      correctOrientation: true
     }
     this.camera.getPicture( options ).then(imageData => {
       let base64Image = 'data:image/jpeg;base64,' + imageData;
